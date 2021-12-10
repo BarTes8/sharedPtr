@@ -31,6 +31,14 @@ public:
         sp.controlBlock_ = nullptr;
     }
 
+    ~shared_ptr() {
+
+    }
+
+    T& operator*() {
+        return *ptr_;
+    }
+
 private:
     struct ControlBlock {
         int sharedRefCount{};
@@ -47,6 +55,8 @@ int main() {
     bt::shared_ptr<int> ptr{new int{5}};
     bt::shared_ptr<int> ptr2 = ptr;
 
+    std::cout << *ptr << '\n';
+    std::cout << *ptr2 << '\n';
     
     return 0;
 }

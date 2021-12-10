@@ -1,3 +1,5 @@
+#include <iostream>
+
 namespace bt{
 
 template <typename T>
@@ -42,5 +44,9 @@ private:
 } // namespace bt
 
 int main() {
+    bt::shared_ptr<int> ptr{new int{5}};
+    bt::shared_ptr<int> ptr2 = ptr;
+
+    
     return 0;
 }

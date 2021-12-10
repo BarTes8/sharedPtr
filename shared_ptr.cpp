@@ -14,6 +14,13 @@ public:
         }
     }
 
+    shared_ptr(const shared_ptr& sp)
+        : ptr_(sp.ptr_)
+        , controlBlock_(sp.controlBlock_)
+    {
+        ++controlBlock_->sharedRefCount;
+    }
+
 private:
     struct ControlBlock {
         int sharedRefCount{};

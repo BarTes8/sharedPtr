@@ -39,6 +39,10 @@ public:
         return *ptr_;
     }
 
+    const T& operator*() const {
+        return *ptr_;
+    }
+
 private:
     struct ControlBlock {
         int sharedRefCount{};
@@ -57,6 +61,6 @@ int main() {
 
     std::cout << *ptr << '\n';
     std::cout << *ptr2 << '\n';
-    
+
     return 0;
 }

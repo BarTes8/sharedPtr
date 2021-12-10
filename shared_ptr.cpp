@@ -21,6 +21,14 @@ public:
         ++controlBlock_->sharedRefCount;
     }
 
+    shared_ptr(shared_ptr&& sp) 
+        : ptr_(sp.ptr_)
+        , controlBlock_(sp.controlBlock_)
+    {
+        sp.ptr_ = nullptr;
+        sp.controlBlock_ = nullptr;
+    }
+
 private:
     struct ControlBlock {
         int sharedRefCount{};

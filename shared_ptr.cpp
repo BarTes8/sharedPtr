@@ -35,6 +35,21 @@ public:
 
     }
 
+    shared_ptr& operator=(shared_ptr&& sp) {
+        if (ptr_) {
+            delete ptr_;
+        }
+        ptr_ = sp.ptr_;
+        controlBlock_ = sp.controlBlock_;
+        sp.ptr_ = nullptr;
+        sp.controlBlock_ = nullptr;
+        return *this;
+    }
+
+    shared_ptr& operator=(const shared_ptr& sp) {
+
+    }
+
     T& operator*() {
         return *ptr_;
     }

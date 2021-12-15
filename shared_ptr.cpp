@@ -74,6 +74,10 @@ public:
         }
     }
 
+    operator bool() const noexcept {
+        return ptr_ != nullptr;
+    }
+
 private:
     struct ControlBlock {
         int sharedRefCount;

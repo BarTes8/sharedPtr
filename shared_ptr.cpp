@@ -58,10 +58,20 @@ public:
         return *ptr_;
     }
 
+    void reset() noexcept {
+        --controlBlock_->sharedRefCount;
+        if (controlBlock_->sharedRefCount == 0) {
+            delete ptr_;
+            delete controlBlock_;
+            ptr_ = nullptr;
+            controlBlock_ = nullptr;
+        }
+    }
+
 private:
     struct ControlBlock {
-        int sharedRefCount{};
-        int weakRefCount{};
+        int sharedRefCount;
+        int weakRefCount;
     };
 
     T* ptr_{nullptr};

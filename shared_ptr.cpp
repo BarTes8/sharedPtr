@@ -32,8 +32,18 @@ public:
     }
 
     ~shared_ptr() {
-
+        reset();
     }
+
+
+    shared_ptr& operator=(const shared_ptr& sp) {
+        reset();
+        ptr_ = sp.ptr_;
+        controlBlock_ = sp.controlBlock_;
+        ++controlBlock_->sharedRefCount;
+        return *this;
+    }
+
 
     shared_ptr& operator=(shared_ptr&& sp) {
         if (ptr_) {
@@ -44,10 +54,6 @@ public:
         sp.ptr_ = nullptr;
         sp.controlBlock_ = nullptr;
         return *this;
-    }
-
-    shared_ptr& operator=(const shared_ptr& sp) {
-
     }
 
     T& operator*() {
